@@ -1,0 +1,173 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "sunbird-core-editor": {
+      "projectType": "library",
+      "root": "projects/sunbird-core-editor",
+      "sourceRoot": "projects/sunbird-core-editor/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sunbird-core-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sunbird-core-editor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sunbird-core-editor/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sunbird-core-editor/src/test.ts",
+            "tsConfig": "projects/sunbird-core-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/sunbird-core-editor/karma.conf.js"
+          }
+        }
+      }
+    },
+    "sunbird-editor-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/sunbird-editor-demo",
+      "sourceRoot": "projects/sunbird-editor-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sunbird-editor-demo",
+            "index": "projects/sunbird-editor-demo/src/index.html",
+            "main": "projects/sunbird-editor-demo/src/main.ts",
+            "polyfills": "projects/sunbird-editor-demo/src/polyfills.ts",
+            "tsConfig": "projects/sunbird-editor-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/sunbird-editor-demo/src/favicon.ico",
+              "projects/sunbird-editor-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sunbird-editor-demo/src/styles.scss",
+              "node_modules/jquery.fancytree/dist/skin-lion/ui.fancytree.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery.fancytree/dist/jquery.fancytree-all-deps.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/sunbird-editor-demo/src/environments/environment.ts",
+                  "with": "projects/sunbird-editor-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "sunbird-editor-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "sunbird-editor-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sunbird-editor-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sunbird-editor-demo/src/test.ts",
+            "polyfills": "projects/sunbird-editor-demo/src/polyfills.ts",
+            "tsConfig": "projects/sunbird-editor-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/sunbird-editor-demo/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/sunbird-editor-demo/src/favicon.ico",
+              "projects/sunbird-editor-demo/src/assets"
+            ],
+            "styles": [
+              "projects/sunbird-editor-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "sunbird-knowlg-editor": {
+      "projectType": "library",
+      "root": "projects/sunbird-knowlg-editor",
+      "sourceRoot": "projects/sunbird-knowlg-editor/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sunbird-knowlg-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sunbird-knowlg-editor/src/test.ts",
+            "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/sunbird-knowlg-editor/karma.conf.js"
+          }
+        }
+      }
+    }
+  }
+}
