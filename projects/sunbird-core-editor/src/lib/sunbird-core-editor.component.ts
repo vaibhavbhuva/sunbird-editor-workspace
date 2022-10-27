@@ -20,6 +20,10 @@ export class SunbirdCoreEditorComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
+    this.initTree();
+  }
+
+  initTree() {
     $("#fancyTree").fancytree({
       extensions: ['glyph', 'dnd5'],
       clickFolderMode: 3,
@@ -84,6 +88,7 @@ export class SunbirdCoreEditorComponent implements OnInit, OnChanges {
       },
       init: (event: any, data: any) => {
         this.treeEventEmitter.emit({ type: event.type, data: data.node });
+        this.setActiveNode();
       },
       click: (event: any, data: any): boolean => {
         this.treeEventEmitter.emit({ type: event.type, data: data.node });
@@ -95,8 +100,11 @@ export class SunbirdCoreEditorComponent implements OnInit, OnChanges {
       renderNode: (event: any, data: any) => {
       }
     });
-    this.fancyTree.getFirstChild().setActive();
   }
+
+  setActiveNode() {
+    this.fancyTree.getFirstChild().setActive();
+  } 
 
   get fancyTree() {
     return $.ui.fancytree.getTree("#fancyTree");
