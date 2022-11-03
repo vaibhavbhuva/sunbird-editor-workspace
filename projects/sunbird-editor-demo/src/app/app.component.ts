@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { collectionEditorConfig } from './data';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sunbird-editor-demo';
+  public editorConfig = collectionEditorConfig;
   
 }

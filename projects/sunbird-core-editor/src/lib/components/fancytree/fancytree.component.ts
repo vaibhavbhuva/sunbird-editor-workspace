@@ -1,22 +1,21 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import 'jquery.fancytree';
 declare var $: any;
+import { CEventEmitter } from '../../event-emitter';
 
 @Component({
-  selector: 'lib-sunbird-core-editor',
-  template: `
-    <p>
-      sunbird-core-editor works!
-    </p>
-    <div id="fancyTree"></div>
-  `,
-  styles: [
-  ],
+  selector: 'lib-fancytree',
+  templateUrl: './fancytree.component.html',
+  styleUrls: ['./fancytree.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SunbirdCoreEditorComponent implements OnInit, OnChanges {
+export class FancytreeComponent implements OnInit, OnChanges {
   @Input('items') public items: any = [];
-  @Output() public treeEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output('init') public treeInitEmitter: CEventEmitter<any> = new CEventEmitter();
+  @Output('clicked') public treeClickEmitter: CEventEmitter<any> = new CEventEmitter();
+  @Output('activated') public treeActiveEmitter: CEventEmitter<any> = new CEventEmitter();
+  @Output('reload') public treeReloadEmitter: CEventEmitter<any> = new CEventEmitter();
+  @Output('render') public treeRenderEmitter: CEventEmitter<any> = new CEventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -87,38 +86,50 @@ export class SunbirdCoreEditorComponent implements OnInit, OnChanges {
         }
       },
       init: (event: any, data: any) => {
-        this.treeEventEmitter.emit({ type: event.type, data: data.node });
+        this.treeInitEmitter.init(data.node);
         this.setActiveNode();
+        this.setExpandNode();
       },
       click: (event: any, data: any): boolean => {
-        this.treeEventEmitter.emit({ type: event.type, data: data.node });
+        this.treeClickEmitter.click(data.node );
         return true;
       },
       activate: (event: any, data: any) => {
-        this.treeEventEmitter.emit({ type: event.type, data: data.node });
+        this.treeActiveEmitter.activate(data.node );
       },
       renderNode: (event: any, data: any) => {
+        this.treeRenderEmitter.render(data.node);
       }
     });
   }
 
+  getFirstChild() {
+    return this.fancyTree.getFirstChild();
+  }
+
   setActiveNode() {
-    this.fancyTree.getFirstChild().setActive();
-  } 
+    this.getFirstChild().setActive();
+  }
+
+  setExpandNode(node?: any) {
+    if (node) {
+      node.setExpanded(true);
+    } else {
+      this.getFirstChild().setExpanded(true);
+    }
+  }
 
   get fancyTree() {
     return $.ui.fancytree.getTree("#fancyTree");
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(!changes['items']['firstChange']) {
+    if (!changes['items']['firstChange']) {
       console.log("changes", changes);
       this.fancyTree.reload(changes['items'].currentValue).done((data: any) => {
-        this.treeEventEmitter.emit({ type: 'fancytreereload', data: data });
+        this.treeReloadEmitter.reload(data);
       });
     }
   }
-
-  
 
 }

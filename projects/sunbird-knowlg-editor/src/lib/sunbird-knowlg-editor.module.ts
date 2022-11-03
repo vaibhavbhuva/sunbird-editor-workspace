@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { SunbirdKnowlgEditorComponent } from './sunbird-knowlg-editor.component';
-import { SunbirdCoreEditorModule } from 'sunbird-core-editor'
+import { SunbirdCoreEditorModule } from 'sunbird-core-editor';
+import { EditorComponent } from './components';
+import { CustomFancytreeComponent } from './components/custom-fancytree/custom-fancytree.component';
 
 
 @NgModule({
   declarations: [
-    SunbirdKnowlgEditorComponent
+    EditorComponent,
+    CustomFancytreeComponent
   ],
   imports: [
-    SunbirdCoreEditorModule
+    SunbirdCoreEditorModule.forRoot({host: 'https://dev.knowlg.sunbird.org/'}),
   ],
   exports: [
-    SunbirdKnowlgEditorComponent
+    EditorComponent
   ]
 })
 export class SunbirdKnowlgEditorModule { }

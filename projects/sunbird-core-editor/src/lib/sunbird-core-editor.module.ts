@@ -1,16 +1,24 @@
-import { NgModule } from '@angular/core';
-import { SunbirdCoreEditorComponent } from './sunbird-core-editor.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FancytreeComponent } from './components';
+import { KnEditorConfig, KN_EDITOR_CONFIG } from './config.token';
 
 @NgModule({
   declarations: [
-    SunbirdCoreEditorComponent
+    FancytreeComponent,
   ],
   imports: [
+    HttpClientModule
   ],
   exports: [
-    SunbirdCoreEditorComponent
+    FancytreeComponent
   ]
 })
-export class SunbirdCoreEditorModule { }
+export class SunbirdCoreEditorModule {
+  static forRoot(config?: KnEditorConfig): ModuleWithProviders<SunbirdCoreEditorModule> {
+    return {
+      ngModule: SunbirdCoreEditorModule,
+      providers: [ {provide: KN_EDITOR_CONFIG, useValue: config}]
+    }
+}
+ }
