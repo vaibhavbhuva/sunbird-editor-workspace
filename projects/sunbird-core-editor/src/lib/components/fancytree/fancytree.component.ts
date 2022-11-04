@@ -13,7 +13,6 @@ import { BaseEventemitterComponent } from '../base-eventemitter/base-eventemitte
 export class FancytreeComponent extends BaseEventemitterComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('fancyTree') public tree!: ElementRef;
   @Input('items') public items: any = [];
-  
   constructor(private treeService: TreeService) {
     super()
    }

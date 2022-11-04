@@ -3,16 +3,17 @@
 </div>
 <div id="left-sidebar">
     <lib-fancytree [items]="data"  (init)="onTreeInit($event);" (activated)="treeEventListener($event)"></lib-fancytree>
+    <div class="mt-20 text-center">
+        <lib-fancytree-buttons></lib-fancytree-buttons>
+        <button class="c-btn c-btn-danger" (click)="deleteNode()">Delete</button>
+    </div>
 </div>
 <div id="content">
     <h4>Selected Node :: {{currentNode?.title}}</h4>
-    <lib-custom-fancytree></lib-custom-fancytree>
+    <!-- <lib-custom-fancytree></lib-custom-fancytree> -->
 </div>
 
-<div id="footer">
+<!-- <div id="footer">
     <lib-fancytree-buttons></lib-fancytree-buttons>
     <button class="mr-15 c-btn" (click)="deleteNode()">Delete</button>
-    <!-- <button class="mr-15 c-btn" [disabled]="!isFolder" (click)="addSibling()">Add sibling</button> -->
-    <!-- <button class="mr-15 c-btn" [disabled]="!isFolder" (click)="addFromLibrary()">Add from library</button> -->
-    <!-- <button class="mr-15 c-btn" (click)="reset()">Reset</button> -->
-</div>
+</div> -->

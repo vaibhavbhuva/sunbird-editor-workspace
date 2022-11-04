@@ -13,28 +13,30 @@ export class EditorComponent implements OnInit {
     {
       title: 'Marigold',
       folder: true,
+      root: true,
       key: "0",
       children: [{
         title: "Chapter 1", key: "1", 
         folder: true, 
+        root: false,
         children: [
-          { title: "Node 1.1", key: "2" },
-          { title: "Node 1.2", key: "3" }
+          { title: "Node 1.1", key: "2", folder: false, root: false, },
+          { title: "Node 1.2", key: "3", folder: false, root: false, }
         ]
       },
-      { title: "Chapter 2", key: "4", folder: true},
+      { title: "Chapter 2", key: "4", folder: true, root: false, },
       {
         title: "Chapter 3", key: "5", 
         folder: true, 
+        root: false,
         children: [
-          { title: "Node 3.1", key: "6" },
-          { title: "Node 3.2", key: "7" }
+          { title: "Node 3.1", key: "6", folder: false, root: false },
+          { title: "Node 3.2", key: "7" , folder: false, root: false }
         ]
       }]
     }
   ];
   public data = JSON.parse(JSON.stringify(this.dataTemp));
-  public isFolder: boolean = false;
   public currentNode: any;
   constructor(private collectionService: CollectionService, private treeService: TreeService) { }
 
@@ -51,23 +53,7 @@ export class EditorComponent implements OnInit {
 
   treeEventListener(event: any) {
     console.log("treeEventListener");
-    this.isFolder = event.data.folder;
     this.currentNode = event.data;
-    console.log(this.treeService.getActiveNode().getLevel());
-  }
-
-  addSibling() {
-    console.log('click add sibling button');
-    this.data = [{ title: "Node 1", key: "1" }];
-  }
-
-  addFromLibrary() {
-    console.log('click add from library button');
-  }
-
-  reset() {
-    console.log('click reset button');
-    this.data = JSON.parse(JSON.stringify(this.dataTemp));
   }
 
   deleteNode() {

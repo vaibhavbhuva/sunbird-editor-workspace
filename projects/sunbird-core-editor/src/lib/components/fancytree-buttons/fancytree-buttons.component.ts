@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { TreeService } from '../../services/tree/tree.service';
+import { BaseEventemitterComponent } from '../base-eventemitter/base-eventemitter.component';
 
 const DEFAULT_OPTIONS = {
   showChildButton: true,
@@ -12,7 +13,7 @@ const DEFAULT_OPTIONS = {
   styleUrls: ['./fancytree-buttons.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FancytreeButtonsComponent implements OnInit {
+export class FancytreeButtonsComponent extends BaseEventemitterComponent implements OnInit {
   private _config: any = DEFAULT_OPTIONS;
 
   @Input()
@@ -23,13 +24,16 @@ export class FancytreeButtonsComponent implements OnInit {
   get config(): any {
     return this._config;
   }
-  constructor(private treeService: TreeService) { }
+  constructor(private treeService: TreeService) {
+    super();
+   }
 
   ngOnInit(): void {
   }
 
   addChild(): void {
     this.addNode('child');
+    this.emitClickEvent({});
   }
 
   addSibling(): void {
