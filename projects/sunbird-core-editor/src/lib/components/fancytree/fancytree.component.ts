@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import 'jquery.fancytree';
 declare var $: any;
-import { CEventEmitter } from '../../event-emitter';
+import { TreeService } from '../../services/tree/tree.service';
+import { BaseEventemitterComponent } from '../base-eventemitter/base-eventemitter.component';
 
 @Component({
   selector: 'lib-fancytree',
@@ -9,21 +10,23 @@ import { CEventEmitter } from '../../event-emitter';
   styleUrls: ['./fancytree.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FancytreeComponent implements OnInit, OnChanges {
+export class FancytreeComponent extends BaseEventemitterComponent implements OnInit, AfterViewInit, OnChanges {
+  @ViewChild('fancyTree') public tree!: ElementRef;
   @Input('items') public items: any = [];
-  @Output('init') public treeInitEmitter: CEventEmitter<any> = new CEventEmitter();
-  @Output('clicked') public treeClickEmitter: CEventEmitter<any> = new CEventEmitter();
-  @Output('activated') public treeActiveEmitter: CEventEmitter<any> = new CEventEmitter();
-  @Output('reload') public treeReloadEmitter: CEventEmitter<any> = new CEventEmitter();
-  @Output('render') public treeRenderEmitter: CEventEmitter<any> = new CEventEmitter();
-  constructor() { }
+  
+  constructor(private treeService: TreeService) {
+    super()
+   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
     this.initTree();
   }
 
   initTree() {
-    $("#fancyTree").fancytree({
+    $(this.tree.nativeElement).fancytree({
       extensions: ['glyph', 'dnd5'],
       clickFolderMode: 3,
       source: this.items,
@@ -86,21 +89,22 @@ export class FancytreeComponent implements OnInit, OnChanges {
         }
       },
       init: (event: any, data: any) => {
-        this.treeInitEmitter.init(data.node);
+        this.emitInitEvent(data.node);
         this.setActiveNode();
         this.setExpandNode();
       },
       click: (event: any, data: any): boolean => {
-        this.treeClickEmitter.click(data.node );
+        this.emitClickEvent(data.node);
         return true;
       },
       activate: (event: any, data: any) => {
-        this.treeActiveEmitter.activate(data.node );
+        this.emitActiveEvent(data.node);
       },
       renderNode: (event: any, data: any) => {
-        this.treeRenderEmitter.render(data.node);
+        this.emitRenderEvent(data.node);
       }
     });
+    this.treeService.setTreeElement = this.tree.nativeElement;
   }
 
   getFirstChild() {
@@ -120,14 +124,14 @@ export class FancytreeComponent implements OnInit, OnChanges {
   }
 
   get fancyTree() {
-    return $.ui.fancytree.getTree("#fancyTree");
+    return $.ui.fancytree.getTree(this.tree.nativeElement);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes['items']['firstChange']) {
       console.log("changes", changes);
       this.fancyTree.reload(changes['items'].currentValue).done((data: any) => {
-        this.treeReloadEmitter.reload(data);
+        this.emitRenderEvent(data);
       });
     }
   }

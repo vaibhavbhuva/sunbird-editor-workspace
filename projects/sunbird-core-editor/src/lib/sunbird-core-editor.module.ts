@@ -1,17 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FancytreeComponent } from './components';
+import { FancytreeComponent, FancytreeButtonsComponent } from './components';
 import { KnEditorConfig, KN_EDITOR_CONFIG } from './config.token';
 
 @NgModule({
   declarations: [
     FancytreeComponent,
+    FancytreeButtonsComponent
   ],
   imports: [
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   exports: [
-    FancytreeComponent
+    FancytreeComponent,
+    FancytreeButtonsComponent
   ]
 })
 export class SunbirdCoreEditorModule {

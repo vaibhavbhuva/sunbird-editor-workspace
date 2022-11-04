@@ -22,8 +22,11 @@
       "sunbird-core-editor": [
         "dist/sunbird-core-editor"
       ],
-      "sunbird-knowlg-editor": [
-        "dist/sunbird-knowlg-editor"
+      "sunbird-collection-editor": [
+        "dist/sunbird-collection-editor"
+      ],
+      "sunbird-questionset-editor": [
+        "dist/sunbird-questionset-editor"
       ]
     },
     "lib": [

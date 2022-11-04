@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SunbirdKnowlgEditorModule } from 'sunbird-knowlg-editor';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { SunbirdCollectionEditorModule } from 'sunbird-collection-editor';
+import { SunbirdQuestionsetEditorModule } from 'sunbird-questionset-editor';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SunbirdKnowlgEditorModule
+    SunbirdCollectionEditorModule,
+    SunbirdQuestionsetEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

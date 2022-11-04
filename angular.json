@@ -138,23 +138,23 @@
         }
       }
     },
-    "sunbird-knowlg-editor": {
+    "sunbird-collection-editor": {
       "projectType": "library",
-      "root": "projects/sunbird-knowlg-editor",
-      "sourceRoot": "projects/sunbird-knowlg-editor/src",
+      "root": "projects/sunbird-collection-editor",
+      "sourceRoot": "projects/sunbird-collection-editor/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/sunbird-knowlg-editor/ng-package.json"
+            "project": "projects/sunbird-collection-editor/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.lib.prod.json"
+              "tsConfig": "projects/sunbird-collection-editor/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.lib.json"
+              "tsConfig": "projects/sunbird-collection-editor/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -162,9 +162,40 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/sunbird-knowlg-editor/src/test.ts",
-            "tsConfig": "projects/sunbird-knowlg-editor/tsconfig.spec.json",
-            "karmaConfig": "projects/sunbird-knowlg-editor/karma.conf.js"
+            "main": "projects/sunbird-collection-editor/src/test.ts",
+            "tsConfig": "projects/sunbird-collection-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/sunbird-collection-editor/karma.conf.js"
+          }
+        }
+      }
+    },
+    "sunbird-questionset-editor": {
+      "projectType": "library",
+      "root": "projects/sunbird-questionset-editor",
+      "sourceRoot": "projects/sunbird-questionset-editor/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sunbird-questionset-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sunbird-questionset-editor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sunbird-questionset-editor/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sunbird-questionset-editor/src/test.ts",
+            "tsConfig": "projects/sunbird-questionset-editor/tsconfig.spec.json",
+            "karmaConfig": "projects/sunbird-questionset-editor/karma.conf.js"
           }
         }
       }

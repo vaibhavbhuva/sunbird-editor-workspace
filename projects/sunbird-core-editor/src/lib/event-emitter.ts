@@ -1,5 +1,4 @@
 import { EventEmitter} from '@angular/core';
-
 export class CEventEmitter<T> extends EventEmitter {
     constructor() { 
         super()

@@ -1,0 +1,21 @@
+<div id="header">
+    <h4>Sunbird QuestionSet Editor</h4>
+    <div class="fancytreeBtn">
+        <lib-fancytree-buttons [config]="fancytreeBtnConfig" ></lib-fancytree-buttons>
+    </div>
+</div>
+<div id="left-sidebar">
+    <lib-fancytree [items]="data"  (init)="onTreeInit($event);" (activated)="treeEventListener($event)"></lib-fancytree>
+</div>
+<div id="content">
+    <h4>Selected Node :: {{currentNode?.title}}</h4>
+    <lib-custom-fancytree></lib-custom-fancytree>
+</div>
+
+<!-- <div id="footer">
+    <lib-fancytree-buttons [config]="fancytreeBtnConfig" ></lib-fancytree-buttons>
+    <button class="mr-15 c-btn" (click)="deleteNode()">Delete</button>
+    <button class="mr-15 c-btn" [disabled]="!isFolder" (click)="addSibling()">Add sibling</button>
+    <button class="mr-15 c-btn" [disabled]="!isFolder" (click)="addFromLibrary()">Add from library</button>
+    <button class="mr-15 c-btn" (click)="reset()">Reset</button>
+</div> -->
