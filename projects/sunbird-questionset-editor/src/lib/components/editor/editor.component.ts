@@ -37,7 +37,6 @@ export class EditorComponent implements OnInit {
     }
   ];
   public data = JSON.parse(JSON.stringify(this.dataTemp));
-  public isFolder: boolean = false;
   public currentNode: any;
   constructor(private collectionService: CollectionService, private treeService: TreeService) { }
 
@@ -52,11 +51,9 @@ export class EditorComponent implements OnInit {
     console.log("init consumer");
   }
 
-  treeEventListener(event: any) {
+  treeEventListener(data: any) {
     console.log("treeEventListener");
-    this.isFolder = event.data.folder;
-    this.currentNode = event.data;
-    console.log(this.treeService.getActiveNode().getLevel());
+    this.currentNode = data;
   }
 
   addSibling() {

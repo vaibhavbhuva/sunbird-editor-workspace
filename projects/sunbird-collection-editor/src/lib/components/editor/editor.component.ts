@@ -51,9 +51,9 @@ export class EditorComponent implements OnInit {
     console.log("init consumer");
   }
 
-  treeEventListener(event: any) {
+  treeEventListener(data: any) {
     console.log("treeEventListener");
-    this.currentNode = event.data;
+    this.currentNode = data;
   }
 
   deleteNode() {

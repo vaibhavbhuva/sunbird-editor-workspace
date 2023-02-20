@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
-import { SunbirdCoreEditorModule } from 'sunbird-core-editor';
 import { EditorComponent } from './components';
-import { CustomFancytreeComponent } from './components/custom-fancytree/custom-fancytree.component';
-
-
+import { SunbirdCoreEditorModule } from 'sunbird-core-editor';
 @NgModule({
   declarations: [
     EditorComponent,
-    CustomFancytreeComponent
   ],
   imports: [
-    SunbirdCoreEditorModule.forRoot({host: 'https://dev.knowlg.sunbird.org/'}),
+    SunbirdCoreEditorModule(),
   ],
   exports: [
     EditorComponent

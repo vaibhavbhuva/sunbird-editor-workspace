@@ -2,6 +2,20 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 
+***Sunbird Core Editor***
+
+Compiles library into an output directory named dist/ at the given output path.
+
+`ng build sunbird-core-editor`
+
+To compile and build sunbird collection or questionset editor run below command:
+
+`ng build sunbird-collection-editor`
+
+OR
+
+`ng build sunbird-questionset-editor`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

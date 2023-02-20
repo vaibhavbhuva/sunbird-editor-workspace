@@ -13,6 +13,9 @@ import { BaseEventemitterComponent } from '../base-eventemitter/base-eventemitte
 export class FancytreeComponent extends BaseEventemitterComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('fancyTree') public tree!: ElementRef;
   @Input('items') public items: any = [];
+  @Output('activated') public treeActiveEmitter: EventEmitter<any> = new EventEmitter();
+  @Output('reload') public treeReloadEmitter: EventEmitter<any> = new EventEmitter();
+  @Output('render') public treeRenderEmitter: EventEmitter<any> = new EventEmitter();
   constructor(private treeService: TreeService) {
     super()
    }
@@ -97,10 +100,10 @@ export class FancytreeComponent extends BaseEventemitterComponent implements OnI
         return true;
       },
       activate: (event: any, data: any) => {
-        this.emitActiveEvent(data.node);
+        this.treeActiveEmitter.emit(data.node);
       },
       renderNode: (event: any, data: any) => {
-        this.emitRenderEvent(data.node);
+        this.treeRenderEmitter.emit(data.node);
       }
     });
     this.treeService.setTreeElement = this.tree.nativeElement;
@@ -130,7 +133,7 @@ export class FancytreeComponent extends BaseEventemitterComponent implements OnI
     if (!changes['items']['firstChange']) {
       console.log("changes", changes);
       this.fancyTree.reload(changes['items'].currentValue).done((data: any) => {
-        this.emitRenderEvent(data);
+        this.treeReloadEmitter.emit(data);
       });
     }
   }
